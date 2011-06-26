@@ -10,8 +10,8 @@ class OpenStruct
 end
 
 module ToGoogleSpreadsheet
-  CREDENTIALS = ["system-docs@firmafon.dk", 'hepheyhep']
-  SPREADSHEET = "tA6lV1NLsBsDNuP_y8sISIw"
+  CREDENTIALS = ["", '']
+  SPREADSHEET = ""
 end
 
 module GoogleSpreadsheet
