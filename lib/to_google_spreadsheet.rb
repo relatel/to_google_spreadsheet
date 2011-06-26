@@ -9,9 +9,10 @@ class OpenStruct
   end
 end
 
+# Overwrite this
 module ToGoogleSpreadsheet
-  CREDENTIALS = ["", '']
-  SPREADSHEET = ""
+  CREDENTIALS = ["username", 'password']
+  SPREADSHEET = "spreadsheet_key"
 end
 
 module GoogleSpreadsheet
