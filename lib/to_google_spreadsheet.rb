@@ -12,7 +12,7 @@ end
 module GoogleSpreadsheet
   class Spreadsheet
     def find_or_create_worksheet_by_name(name)
-      worksheets.find {|ws| ws.title == name}
+      ws = worksheets.find {|ws| ws.title == name}
       ws ||= add_worksheet(name) # create it if it doesn't exists
       ws
     end
@@ -51,9 +51,9 @@ class Array
   def to_google_spreadsheet(worksheet, spreadsheet = nil)
     session = GoogleSpreadsheet.login(*CREDENTIALS)
     spreadsheet = session.spreadsheet_by_key(spreadsheet || DEFAULT_SPREADSHEET)
-    @ws = spreadsheet.find_or_create_worksheet_by_name(worksheet)
-    @ws.set_header_columns(self.first)
-    @ws.populate(self)
-    @ws.save
+    ws = spreadsheet.find_or_create_worksheet_by_name(worksheet)
+    ws.set_header_columns(self.first)
+    ws.populate(self)
+    ws.save
   end
 end
