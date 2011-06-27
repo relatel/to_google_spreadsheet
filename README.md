@@ -57,7 +57,7 @@ assert array.all? {|e| [OpenStruct,Hash,ActiveRecord::Base].any? { |type| e.kind
 
 I.e. anything that is `#kind_of? Hash`, an `OpenStruct` or an ActiveRecord model. It is [easy to add support for additional types][at].
 
-[at]: https://github.com/firmafon/to_google_spreadsheet/blob/master/lib/to_google_spreadsheet.rb#L46-50
+[at]: https://github.com/firmafon/to_google_spreadsheet/blob/master/lib/to_google_spreadsheet.rb#L40-44
 
 # License
 
