@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version     = ToGoogleSpreadsheet::VERSION
   s.authors     = ["Simon H. Eskildsen"]
   s.email       = ["sirup@sirupsen.com"]
-  s.homepage    = ""
+  s.homepage    = "https://github.com/firmafon/to_google_spreadsheet"
   s.summary     = %q{Convert an Array where Array.all? {|e| [OpenStruct,Hash,ActiveRecord::Base].any? { |type| e.kind_of?(type) }} to a Google spreadsheet}
   s.description = %q{Convert an Array where Array.all? {|e| [OpenStruct,Hash,ActiveRecord::Base].any? { |type| e.kind_of?(type) }} to a Google spreadsheet}
 
