@@ -9,12 +9,6 @@ class OpenStruct
   end
 end
 
-# Overwrite this
-module ToGoogleSpreadsheet
-  CREDENTIALS = ["username", 'password']
-  DEFAULT_SPREADSHEET = "spreadsheet_key"
-end
-
 module GoogleSpreadsheet
   class Spreadsheet
     def worksheet_by_name(name)
