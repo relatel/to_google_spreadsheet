@@ -13,6 +13,10 @@ Results in:
 
 ## Usage
 
+### Installation
+
+    $ gem install to_google_spreadsheet
+
 ### Setup
 
 You must provide your Google Docs credentials, optionally you can supply a default spreadsheet to use:
