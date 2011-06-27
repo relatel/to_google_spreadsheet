@@ -45,7 +45,7 @@ class Array
     @ws.save
   end
 end
-```ruby
+```
 
 The first argument is the name of the worksheet within the spreadsheet, e.g. "Accounts", if it doesn't already exist, it will be created. The second, optional, argument is the spreadsheet key, if it is not supplied, the default spreadsheet, defined by `ToGoogleSpreadsheet::DEFAULT_SPREADSHEET`, will be used.
 
