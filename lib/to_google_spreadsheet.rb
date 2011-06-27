@@ -22,7 +22,7 @@ module GoogleSpreadsheet
     def set_header_columns(row)
       # #sort_by to sort by symbols
       get_hash_from_row(row).keys.sort_by { |k,v| k.to_s }.each_with_index do |key, col_nr|
-        self[1, col_nr + 1] = key.to_s.capitalize
+        self[1, col_nr + 1] = humanize(key)
       end
     end
 
@@ -42,6 +42,10 @@ module GoogleSpreadsheet
       return row.attributes if row.respond_to?(:attributes) # ar
       return row._hash if row.respond_to?(:_hash) # ostruct
       row # fallback to handle hashes
+    end
+
+    def humanize(text)
+      text.to_s.gsub(/_/, " ").capitalize
     end
   end
 end
