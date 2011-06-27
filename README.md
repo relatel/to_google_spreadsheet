@@ -14,10 +14,10 @@ Results in:
 You must provide your Google Docs credentials, optionally you can supply a default spreadsheet to use:
     
 ```ruby
-    module ToGoogleSpreadsheet
-      CREDENTIALS = ["account@company.com", "seekrit"]
-      DEFAULT_SPREADSHEET = "spreadsheet_key" # see note below
-    end
+module ToGoogleSpreadsheet
+  CREDENTIALS = ["account@company.com", "seekrit"]
+  DEFAULT_SPREADSHEET = "spreadsheet_key" # see note below
+end
 ```
 
 The spreadsheet key is found in the URL when visiting the spreadsheet:
@@ -27,7 +27,7 @@ The spreadsheet key is found in the URL when visiting the spreadsheet:
 ## Supported objects
 
 ```ruby
-  assert array.all? {|e| [OpenStruct,Hash,ActiveRecord::Base].any? { |type| e.kind_of?(type) }}  to a Google spreadsheet
+assert array.all? {|e| [OpenStruct,Hash,ActiveRecord::Base].any? { |type| e.kind_of?(type) }}  to a Google spreadsheet
 ```
 
 I.e. anything that is `#kind_of? Hash`, an `OpenStruct` or an ActiveRecord model. It is [easy to add support for additional types][at].
