@@ -2,8 +2,10 @@
 
 to_google_spreadsheet makes it trivial to populate a Google spreadsheet with an Array of Ruby objects.
 
-    # Adds the users Bob and John to the default spreadsheet in the worksheet Employees
-    [{:name => "Bob", :age => 26}, {:name => "John", :age => 28}].to_google_spreadsheet("Employees")
+```ruby
+# Adds the users Bob and John to the default spreadsheet in the worksheet Employees
+[{:name => "Bob", :age => 26}, {:name => "John", :age => 28}].to_google_spreadsheet("Employees")
+```
 
 Results in:
 
