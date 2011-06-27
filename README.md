@@ -59,3 +59,6 @@ I.e. anything that is `#kind_of? Hash`, an `OpenStruct` or an ActiveRecord model
 
 [at]: https://github.com/firmafon/to_google_spreadsheet/blob/master/lib/to_google_spreadsheet.rb#L46-50
 
+# License
+
+to_google_spreadsheet is released under the MIT license.
