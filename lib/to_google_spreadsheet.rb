@@ -45,7 +45,7 @@ module GoogleSpreadsheet
   end
 end
 
-class Array
+module Enumerable
   include ToGoogleSpreadsheet
 
   def to_google_spreadsheet(worksheet, spreadsheet = nil)
