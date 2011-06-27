@@ -20,7 +20,8 @@ module GoogleSpreadsheet
 
   class Worksheet
     def set_header_columns(row)
-      get_hash_from_row(row).keys.each_with_index do |key, col_nr|
+      # #sort_by to sort by symbols
+      get_hash_from_row(row).keys.sort_by { |k,v| k.to_s }.each_with_index do |key, col_nr|
         self[1, col_nr + 1] = key.to_s.capitalize
       end
     end
@@ -30,7 +31,7 @@ module GoogleSpreadsheet
       # provided by the Gem
       # https://github.com/gimite/google-spreadsheet-ruby/blob/master/lib/google_spreadsheet.rb#L693-700
       rows.each_with_index do |row, row_nr|
-        get_hash_from_row(row).each_with_index do |val, col_nr|
+        get_hash_from_row(row).sort_by { |k,v| k.to_s }.each_with_index do |val, col_nr|
           self[row_nr + 2, col_nr + 1] = val.last
         end
       end
