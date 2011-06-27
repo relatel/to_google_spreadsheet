@@ -12,7 +12,7 @@ end
 # Overwrite this
 module ToGoogleSpreadsheet
   CREDENTIALS = ["username", 'password']
-  SPREADSHEET = "spreadsheet_key"
+  DEFAULT_SPREADSHEET = "spreadsheet_key"
 end
 
 module GoogleSpreadsheet
@@ -54,9 +54,9 @@ end
 class Array
   include ToGoogleSpreadsheet
 
-  def to_google_spreadsheet(worksheet)
+  def to_google_spreadsheet(worksheet, spreadsheet = nil)
     session = GoogleSpreadsheet.login(*CREDENTIALS)
-    spreadsheet = session.spreadsheet_by_key(SPREADSHEET)
+    spreadsheet = session.spreadsheet_by_key(spreadsheet || DEFAULT_SPREADSHEET)
     @ws = spreadsheet.worksheet_by_name(worksheet)
     @ws.set_header_columns(self.first)
     @ws.populate(self)
