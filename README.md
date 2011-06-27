@@ -11,6 +11,12 @@ Results in:
 
 ![Image of Google spreadsheets result once running above command](http://f.cl.ly/items/2O3w2k0Y410R3c3r3T1K/Screen%20shot%202011-06-27%20at%209.16.11%20.png)
 
+You could also use this within Rails like so:
+
+```ruby
+Account.all.to_google_spreadsheet("Accounts")
+```
+
 ## Usage
 
 ### Installation
