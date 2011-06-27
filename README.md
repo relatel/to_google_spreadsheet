@@ -56,7 +56,7 @@ The first argument is the name of the worksheet within the spreadsheet, e.g. "Ac
 ## Supported objects
 
 ```ruby
-assert array.all? {|e| [OpenStruct,Hash,ActiveRecord::Base].any? { |type| e.kind_of?(type) }}  to a Google spreadsheet
+assert array.all? {|e| [OpenStruct,Hash,ActiveRecord::Base].any? { |type| e.kind_of?(type) }}
 ```
 
 I.e. anything that is `#kind_of? Hash`, an `OpenStruct` or an ActiveRecord model. It is [easy to add support for additional types][at].
