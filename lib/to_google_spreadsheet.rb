@@ -1,6 +1,6 @@
 require 'rubygems'
 require 'google_spreadsheet'
-require "./lib/to_google_spreadsheet/version"
+require "to_google_spreadsheet/version"
 
 # get the openstruct attribute hash
 class OpenStruct
