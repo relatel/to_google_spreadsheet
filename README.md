@@ -11,7 +11,9 @@ Results in:
 
 ![Image of Google spreadsheets result once running above command](http://f.cl.ly/items/2O3w2k0Y410R3c3r3T1K/Screen%20shot%202011-06-27%20at%209.16.11%20.png)
 
-## Setup
+## Usage
+
+### Setup
 
 You must provide your Google Docs credentials, optionally you can supply a default spreadsheet to use:
     
@@ -25,6 +27,27 @@ end
 The spreadsheet key is found in the URL when visiting the spreadsheet:
 
 ![Image showing how the key is found in the URL in Google Docs](http://f.cl.ly/items/3j2q0S063j3v1I1P3x1p/Screen%20shot%202011-06-27%20at%209.24.56%20.png)
+
+### Usage
+
+`#to_google_spreadsheet` is simply a method defined on Array, thus any subclasses hereof should work with `to_google_spreadsheet` as expected. `Array#to_google_spreadsheet` takes two arguments:
+
+```ruby
+class Array
+  include ToGoogleSpreadsheet
+
+  def to_google_spreadsheet(worksheet, spreadsheet = nil)
+    session = GoogleSpreadsheet.login(*CREDENTIALS)
+    spreadsheet = session.spreadsheet_by_key(spreadsheet || DEFAULT_SPREADSHEET)
+    @ws = spreadsheet.find_or_create_worksheet_by_name(worksheet)
+    @ws.set_header_columns(self.first)
+    @ws.populate(self)
+    @ws.save
+  end
+end
+```ruby
+
+The first argument is the name of the worksheet within the spreadsheet, e.g. "Accounts", if it doesn't already exist, it will be created. The second, optional, argument is the spreadsheet key, if it is not supplied, the default spreadsheet, defined by `ToGoogleSpreadsheet::DEFAULT_SPREADSHEET`, will be used.
 
 ## Supported objects
 
