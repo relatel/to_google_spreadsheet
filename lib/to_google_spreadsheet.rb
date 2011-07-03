@@ -10,6 +10,16 @@ class OpenStruct
 end
 
 module GoogleSpreadsheet
+  def self.config
+    yield GoogleSpreadsheet::Config
+  end
+
+  module Config
+    extend self
+
+    attr_accessor :email, :password, :default_spreadsheet
+  end
+
   class Spreadsheet
     def find_or_create_worksheet_by_name(name)
       ws = worksheets.find {|ws| ws.title == name}
@@ -51,11 +61,10 @@ module GoogleSpreadsheet
 end
 
 module Enumerable
-  include ToGoogleSpreadsheet
-
-  def to_google_spreadsheet(worksheet, spreadsheet = nil)
-    session = GoogleSpreadsheet.login(*CREDENTIALS)
-    spreadsheet = session.spreadsheet_by_key(spreadsheet || DEFAULT_SPREADSHEET)
+  def to_google_spreadsheet(worksheet, spreadsheet = GoogleSpreadsheet::Config.default_spreadsheet)
+    session = GoogleSpreadsheet.login(GoogleSpreadsheet::Config.email, 
+                                      GoogleSpreadsheet::Config.password)
+    spreadsheet = session.spreadsheet_by_key(spreadsheet)
     ws = spreadsheet.find_or_create_worksheet_by_name(worksheet)
     ws.set_header_columns(self.first)
     ws.populate(self)

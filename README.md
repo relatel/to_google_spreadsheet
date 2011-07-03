@@ -28,11 +28,16 @@ Account.all.to_google_spreadsheet("Accounts")
 You must provide your Google Docs credentials, optionally you can supply a default spreadsheet to use:
     
 ```ruby
-module ToGoogleSpreadsheet
-  CREDENTIALS = ["account@company.com", "seekrit"]
-  DEFAULT_SPREADSHEET = "spreadsheet_key" # see note below
+GoogleSpreadsheet.config do |c|
+  c.email               = "user@company.com"
+  c.password            = "seekrit"
+
+  # optional, see note below on how to obtain a spreadsheet key
+  c.default_spreadsheet = "spreadsheet_key"
 end
 ```
+
+### Obtaining your spreadsheet key
 
 The spreadsheet key is found in the URL when visiting the spreadsheet:
 
@@ -40,24 +45,23 @@ The spreadsheet key is found in the URL when visiting the spreadsheet:
 
 ### Usage
 
-`#to_google_spreadsheet` is simply a method defined on Array, thus any subclasses hereof should work with `to_google_spreadsheet` as expected. `Array#to_google_spreadsheet` takes two arguments:
+`#to_google_spreadsheet` is simply a method defined on Enumerable, thus any subclasses hereof should work with `to_google_spreadsheet` as expected (e.g. Arrays). `Enumerable#to_google_spreadsheet` takes two arguments:
 
 ```ruby
-class Array
-  include ToGoogleSpreadsheet
-
-  def to_google_spreadsheet(worksheet, spreadsheet = nil)
-    session = GoogleSpreadsheet.login(*CREDENTIALS)
-    spreadsheet = session.spreadsheet_by_key(spreadsheet || DEFAULT_SPREADSHEET)
-    @ws = spreadsheet.find_or_create_worksheet_by_name(worksheet)
-    @ws.set_header_columns(self.first)
-    @ws.populate(self)
-    @ws.save
+module Enumerable
+  def to_google_spreadsheet(worksheet, spreadsheet = GoogleSpreadsheet::Config.default_spreadsheet)
+    session = GoogleSpreadsheet.login(GoogleSpreadsheet::Config.email, 
+                                      GoogleSpreadsheet::Config.password)
+    spreadsheet = session.spreadsheet_by_key(spreadsheet)
+    ws = spreadsheet.find_or_create_worksheet_by_name(worksheet)
+    ws.set_header_columns(self.first)
+    ws.populate(self)
+    ws.save
   end
 end
 ```
 
-The first argument is the name of the worksheet within the spreadsheet, e.g. "Accounts", if it doesn't already exist, it will be created. The second, optional, argument is the spreadsheet key, if it is not supplied, the default spreadsheet, defined by `ToGoogleSpreadsheet::DEFAULT_SPREADSHEET`, will be used.
+The first argument being the name of the worksheet within the spreadsheet, e.g. "Accounts", if it doesn't already exist, it will be created. The second, optional, argument is the spreadsheet key (see Obtaining your spreadsheet key above), if it is not supplied, the default spreadsheet, defined by in the configuration will be used.
 
 ## Supported objects
 
