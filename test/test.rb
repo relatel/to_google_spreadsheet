@@ -18,18 +18,9 @@ require 'to_google_spreadsheet'
 #   }
 # ]
 
-# module ToGoogleSpreadsheet
-#   CREDENTIALS = ["system-docs@firmafon.dk", "pinkpony42"]
-#   DEFAULT_SPREADSHEET = "tA6lV1NLsBsDNuP_y8sISIw"
-# end
-# 
-# GoogleSpreadsheet.config do
-
-# end
-
 GoogleSpreadsheet.config do |c|
-  c.email               = "system-docs@firmafon.dk"
-  c.password            = "pinkpony42"
+  c.email               = "dummy"
+  c.password            = "seekrit"
   c.default_spreadsheet = "0Agovhaw3pUnDdERZT3oyemlQY2JUaGJjQWNhb0Q3b2c"
 end
 
