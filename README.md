@@ -63,6 +63,37 @@ end
 
 The first argument being the name of the worksheet within the spreadsheet, e.g. "Accounts", if it doesn't already exist, it will be created. The second, optional, argument is the spreadsheet key (see Obtaining your spreadsheet key above), if it is not supplied, the default spreadsheet, defined by in the configuration will be used.
 
+### Examples
+
+```ruby
+# Configure
+GoogleSpreadsheet.config do |c|
+  c.email               = "user@company.com"
+  c.password            = "seekrit"
+
+  # optional, see note below on how to obtain a spreadsheet key
+  c.default_spreadsheet = "spreadsheet_key"
+end
+
+# Populates the worksheet "Employees" in the default spreadsheet 
+# with two employees
+[
+  {:name => "Bob", :age => 26}, 
+  {:name => "John", :age => 28}
+].to_google_spreadsheet("Employees")
+
+# Populates the worksheet "Signups" in the nondefault spreadsheet 
+# with two signup dates
+[
+  {:date => "18/7/2011", :signups => 28},
+  {:date => "19/7/2011", :signups => 33}
+].to_google_spreadsheet("Signups", "other_spreadsheet_key")
+
+# Populates the worksheet "Accounts" in the default spreadsheet 
+# with all # accounts in the database
+Account.all.to_google_spreadsheet("Accounts")
+```
+
 ## Supported objects
 
 ```ruby
