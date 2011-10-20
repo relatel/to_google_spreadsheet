@@ -61,7 +61,12 @@ module GoogleSpreadsheet
 end
 
 module Enumerable
-  def to_google_spreadsheet(worksheet, spreadsheet = GoogleSpreadsheet::Config.default_spreadsheet)
+  def to_google_spreadsheet(worksheet, spreadsheet = nil)
+    # We do this explicityly instead of using the default_spreadsheet as default
+    # in the parameters since we want to let people pass nil to indicate they
+    # want to use the default spreadsheet.
+    spreadsheet = GoogleSpreadsheet::Config.default_spreadsheet unless spreadsheet
+
     session = GoogleSpreadsheet.login(GoogleSpreadsheet::Config.email, 
                                       GoogleSpreadsheet::Config.password)
     spreadsheet = session.spreadsheet_by_key(spreadsheet)
